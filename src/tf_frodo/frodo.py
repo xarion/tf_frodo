@@ -13,7 +13,7 @@ class FRODO:
         self.dtype = dtype
 
     def fit(self, data):
-        extracted_feature_list = self.feature_extractor(data)["layer_outputs"]
+        extracted_feature_list = self.feature_extractor.predict(data)["layer_outputs"]
         extracted_feature_list = self.cast_all(extracted_feature_list)
         means = [tf.reduce_mean(features, axis=0, keepdims=False) for features in extracted_feature_list]
         stds = [tf.math.reduce_std(features, axis=0) for features in extracted_feature_list]
