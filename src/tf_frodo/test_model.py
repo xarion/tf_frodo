@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from tf_frodo.frodo import FRODO
+from . import FRODO
 
 mnist = tf.keras.datasets.mnist
 
@@ -50,7 +50,7 @@ probability_model = tf.keras.Sequential([
 probability_model.compile()
 probability_model.predict(x_test)
 
-f = FRODO(probability_model)
+f = FRODO(probability_model, skip_first_N=2)
 
 model_with_frodo = f.fit(x_test)
 

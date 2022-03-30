@@ -1,13 +1,15 @@
 import tensorflow as tf
 import tensorflow_probability as tfp
 
-from tf_frodo.utils import create_feature_extractor
+from .utils import create_feature_extractor
 
 
 class FRODO:
-    def __init__(self, model, dtype=tf.float32):
+    def __init__(self, model, dtype=tf.float32, layer_names=[], skip_first_N=0):
         super().__init__()
-        self.feature_extractor = create_feature_extractor(model, retain_outputs=True)
+        self.feature_extractor = create_feature_extractor(model, retain_outputs=True,
+                                                          layer_names=layer_names,
+                                                          skip_first_N=skip_first_N)
         self.extracted_features = None
         self.means, self.stds, self.inverse_covariances = None, None, None
         self.dtype = dtype
